@@ -5,7 +5,12 @@ const app = express();
 const port = 3000;
 
 app.get("/home/user/:name/:age", (req, res) => {
-  res.send(`Welcome ${req.params.name}, you're ${req.params.age} years old`);
+  if (req.params.age < 18) {
+    res.send(`Hello ${req.params.name}, you're too young`);
+  }
+  else {
+    res.send(`Welcome ${req.params.name}, you're ${req.params.age} years old`);
+  } 
 })
 
 app.listen(port, () => {
