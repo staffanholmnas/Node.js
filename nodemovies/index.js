@@ -31,7 +31,7 @@ app.get("/api/movies/:id", (req, res) => {
 // Add new movie
 app.post("/api/movies", (req, res) => {
   // Extract movie from the request body and generate id
-  const newMovie = {'id': Date.now(), ...req.body};
+  const newMovie = {'id': `${Date.now()}`, ...req.body};
 
   // Add new movie at the end of the movies array
   movies = [...movies, newMovie];
