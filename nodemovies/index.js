@@ -39,6 +39,27 @@ app.post("/api/movies", (req, res) => {
   res.json(newMovie);
 });
 
+//Delete movie
+app.delete("/api/movies/:id", (req, res) => { 
+  const id = req.params.id;
+
+  movies = movies.filter(movie => movie.id !== id);
+  res.status(204).end();
+})
+
+//Update movie
+app.put("/api/movies/:id", (req, res) => { 
+  const id = req.params.id;
+  const updatedMovie = {'id': id, ...req.body};
+
+//Get the index of updated movie
+const index = movies.findIndex(movie => movie.id === id);
+//Replace updated movie in the array
+movies.splice(index, 1, updatedMovie);
+
+res.json(updatedMovie);
+})
+
 app.listen(port, () => {
    console.log(`Server is running on port ${port}.`);
 });
