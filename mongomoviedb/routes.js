@@ -26,7 +26,19 @@ router.post("/movies", async (req, res) => {
   } catch(err) {
     return res.status(500).json({ message: err.message });
   }
-  
+
+})
+
+// Delete movie by title
+router.delete("/movies", async (req, res) => {
+  await Movie.deleteOne({title: req.body.title}, (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: err.message });
+    }
+    else {
+      res.status(200).json(result);
+    }
+  });
 })
 
 module.exports = router;
