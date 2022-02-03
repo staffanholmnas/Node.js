@@ -54,7 +54,7 @@ const deleteMovie = (req, res) => {
     text: 'DELETE FROM movies WHERE id = $1',
     values: [req.params.id],
   }
-  
+
   db.query(query, (err, res) => {
     if (err) {
       return console.error('Error executing query', err.stack)
@@ -64,9 +64,29 @@ const deleteMovie = (req, res) => {
   res.status(204).end();
 }
 
+// Update movie
+const updateMovie = (req, res) => {
+  const editedMovie = req.body;
+
+  const query = {
+    text: 'UPDATE movies SET title=$1, director=$2, year=$3 WHERE id = $4',
+    values: [editedMovie.title, editedMovie.director, editedMovie.year, req.params.id],
+  }
+
+  db.query(query, (err, res) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+  })
+
+  res.json(editedMovie);
+
+}
+
 module.exports = {
   getAllMovies: getAllMovies,
   getMovieById: getMovieById,
   addMovie: addMovie,
-  deleteMovie: deleteMovie
+  deleteMovie: deleteMovie,
+  updateMovie: updateMovie
 }
