@@ -48,8 +48,25 @@ const addMovie = (req, res) => {
   res.json(newMovie);
 }
 
+// Delete movie
+const deleteMovie = (req, res) => {
+  const query = {
+    text: 'DELETE FROM movies WHERE id = $1',
+    values: [req.params.id],
+  }
+  
+  db.query(query, (err, res) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+  })
+
+  res.status(204).end();
+}
+
 module.exports = {
   getAllMovies: getAllMovies,
   getMovieById: getMovieById,
-  addMovie: addMovie
+  addMovie: addMovie,
+  deleteMovie: deleteMovie
 }
