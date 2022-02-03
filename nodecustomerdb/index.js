@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 app.get("/api/customers", query.getAllCustomers)
 app.get("/api/customers/:id", query.getCustomerById);
 app.post("/api/customers", query.addCustomer);
+app.delete("/api/customers/:id", query.deleteCustomer);
+app.put("/api/customers/:id", query.updateCustomer);
 
 const port = 3000;
 

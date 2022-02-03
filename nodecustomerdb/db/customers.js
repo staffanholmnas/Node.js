@@ -47,8 +47,43 @@ const addCustomer = (req, res) => {
   res.json(newCustomer);
 }
 
+// Delete a customer
+const deleteCustomer = (req, res) => {
+  const query = {
+    text: 'DELETE FROM customers WHERE id = $1',
+    values: [req.params.id],
+  }
+
+  db.query(query, (err) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+  })
+
+  res.status(204).end();
+}
+
+// Update a customer
+const updateCustomer = (req, res) => {
+  const editedCustomer = req.body;
+  const query = {
+    text: 'UPDATE customers SET firstname=$1, lastname=$2, email=$3, phone=$4 WHERE id = $5',
+    values: [editedCustomer.firstname, editedCustomer.lastname, editedCustomer.email, editedCustomer.phone, req.params.id],
+  }
+
+  db.query(query, (err) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+  })
+
+  res.json(editedCustomer);
+}
+
 module.exports = {
   getAllCustomers: getAllCustomers,
   getCustomerById: getCustomerById,
   addCustomer: addCustomer,
+  deleteCustomer: deleteCustomer,
+  updateCustomer: updateCustomer
 }
