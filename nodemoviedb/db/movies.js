@@ -30,7 +30,26 @@ const getMovieById = (req, res) => {
   })
 }
 
+// Add new movie
+const addMovie = (req, res) => {
+  const newMovie = req.body;
+
+  const query = {
+    text: 'INSERT INTO movies (title, director, year) VALUES ($1, $2, $3)',
+    values: [newMovie.title, newMovie.director, newMovie.year],
+  }
+
+  db.query(query, (err, res) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+  })
+
+  res.json(newMovie);
+}
+
 module.exports = {
   getAllMovies: getAllMovies,
   getMovieById: getMovieById,
+  addMovie: addMovie
 }
