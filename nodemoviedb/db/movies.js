@@ -83,10 +83,20 @@ const updateMovie = (req, res) => {
 
 }
 
+// Delete all movies
+const deleteAllMovies = () => {
+  db.query('DELETE FROM movies', (err, res) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+  })
+}
+
 module.exports = {
   getAllMovies: getAllMovies,
   getMovieById: getMovieById,
   addMovie: addMovie,
   deleteMovie: deleteMovie,
-  updateMovie: updateMovie
+  updateMovie: updateMovie,
+  deleteAllMovies: deleteAllMovies
 }
