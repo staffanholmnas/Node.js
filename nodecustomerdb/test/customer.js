@@ -34,3 +34,16 @@ describe('/POST customers', () => {
       });
   });
 });
+
+describe('/GET customers', () => {
+  it('Fetch all customers', (done) => {
+    chai.request(app)
+      .get('/api/customers')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('array');
+        res.body.length.should.be.eql(1);
+        done();
+    });
+  });
+});
