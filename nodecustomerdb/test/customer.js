@@ -31,6 +31,6 @@ describe('/POST customers', () => {
         res.body.should.have.property('firstname');
         res.body.should.have.property('lastname');
         done();
-       });
+      });
   });
 });
