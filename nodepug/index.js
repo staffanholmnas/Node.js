@@ -10,15 +10,12 @@ let movies = [
 ]
 
 app.set('view engine', 'pug');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/hello", (req, res) => {
-  res.render("hello", {firstname: 'John', lastname: 'Johnson'});
-});
-
-app.get("/movies", (req, res) => {
+app.get("/", (req, res) => {
   res.render("movielist", {movies: movies});
-});
+})
 
 app.get("/addmovie", (req, res) => {
   res.render("addmovie");
@@ -27,7 +24,7 @@ app.get("/addmovie", (req, res) => {
 app.post("/addmovie", (req, res) => {
   const newMovie = {id: new Date().now, title: req.body.title, director: req.body.director, year: req.body.year};
   movies = [...movies, newMovie];
-  res.redirect("/movies");
+  res.redirect("/");
 })
 
 app.listen(port, () => {
