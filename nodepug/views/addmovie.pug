@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Add movie
+  body
+    h1 New movie
+    form(action='/addmovie', method='POST')
+      div
+        input(type="text", name="title")
+      div
+        input(type="text", name="director")
+      div
+        input(type="number", name="year") 
+      div
+        input(type="submit", value="Add")
