@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const app = express();
 const port = 3000;
 
-
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'pug')
@@ -28,6 +29,6 @@ app.post("/addcustomer", (req, res) => {
   res.redirect("/");
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${port}.`);
 });
