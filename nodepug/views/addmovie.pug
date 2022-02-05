@@ -2,14 +2,16 @@ doctype html
 html
   head
     title Add movie
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous")
   body
-    h1 New movie
-    form(action='/addmovie', method='POST')
-      div
-        input(type="text", name="title")
-      div
-        input(type="text", name="director")
-      div
-        input(type="number", name="year") 
-      div
-        input(type="submit", value="Add")
+    div.container
+      h1 New movie
+      form(action='/addmovie', method='POST')
+        div(class="form-group")
+          input(type="text", name="title", class="form-control", placeholder="Title")
+        div(class="form-group")
+          input(type="text", name="director", class="form-control" placeholder="Director")
+        div(class="form-group")
+          input(type="number", name="year", class="form-control" placeholder="Year") 
+        div
+          input(type="submit", class="btn btn-primary", value="Add")
